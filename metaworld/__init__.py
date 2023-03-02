@@ -203,27 +203,29 @@ class MT50(Benchmark):
 class Assembly(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("assembly-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["assembly-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -239,27 +241,29 @@ gym.register(
 class Basketball(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("basketball-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["basketball-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -275,27 +279,29 @@ gym.register(
 class BinPicking(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("bin-picking-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["bin-picking-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -311,27 +317,29 @@ gym.register(
 class BoxClose(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("box-close-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["box-close-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -347,27 +355,29 @@ gym.register(
 class ButtonPressTopdown(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("button-press-topdown-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["button-press-topdown-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -383,27 +393,29 @@ gym.register(
 class ButtonPressTopdownWall(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("button-press-topdown-wall-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["button-press-topdown-wall-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -419,27 +431,29 @@ gym.register(
 class ButtonPress(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("button-press-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["button-press-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -455,27 +469,29 @@ gym.register(
 class ButtonPressWall(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("button-press-wall-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["button-press-wall-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -491,27 +507,29 @@ gym.register(
 class CoffeeButton(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("coffee-button-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["coffee-button-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -527,27 +545,29 @@ gym.register(
 class CoffeePull(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("coffee-pull-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["coffee-pull-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -563,27 +583,29 @@ gym.register(
 class CoffeePush(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("coffee-push-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["coffee-push-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -599,27 +621,29 @@ gym.register(
 class DialTurn(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("dial-turn-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["dial-turn-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -635,27 +659,29 @@ gym.register(
 class Disassemble(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("disassemble-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["disassemble-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -671,27 +697,29 @@ gym.register(
 class DoorClose(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("door-close-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["door-close-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -707,27 +735,29 @@ gym.register(
 class DoorLock(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("door-lock-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["door-lock-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -743,27 +773,29 @@ gym.register(
 class DoorOpen(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("door-open-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["door-open-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -779,27 +811,29 @@ gym.register(
 class DoorUnlock(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("door-unlock-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["door-unlock-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -815,27 +849,29 @@ gym.register(
 class HandInsert(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("hand-insert-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["hand-insert-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -851,27 +887,29 @@ gym.register(
 class DrawerClose(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("drawer-close-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["drawer-close-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -887,27 +925,29 @@ gym.register(
 class DrawerOpen(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("drawer-open-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["drawer-open-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -923,27 +963,29 @@ gym.register(
 class FaucetOpen(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("faucet-open-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["faucet-open-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -959,27 +1001,29 @@ gym.register(
 class FaucetClose(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("faucet-close-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["faucet-close-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -995,27 +1039,29 @@ gym.register(
 class Hammer(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("hammer-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["hammer-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1031,27 +1077,29 @@ gym.register(
 class HandlePressSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("handle-press-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["handle-press-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1067,27 +1115,29 @@ gym.register(
 class HandlePress(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("handle-press-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["handle-press-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1103,27 +1153,29 @@ gym.register(
 class HandlePullSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("handle-pull-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["handle-pull-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1139,27 +1191,29 @@ gym.register(
 class HandlePull(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("handle-pull-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["handle-pull-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1175,27 +1229,29 @@ gym.register(
 class LeverPull(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("lever-pull-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["lever-pull-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1211,27 +1267,29 @@ gym.register(
 class PegInsertSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("peg-insert-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["peg-insert-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1247,27 +1305,29 @@ gym.register(
 class PickPlaceWall(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("pick-place-wall-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["pick-place-wall-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1283,27 +1343,29 @@ gym.register(
 class PickOutOfHole(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("pick-out-of-hole-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["pick-out-of-hole-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1319,27 +1381,29 @@ gym.register(
 class Reach(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("reach-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["reach-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1355,27 +1419,29 @@ gym.register(
 class PushBack(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("push-back-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["push-back-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1391,27 +1457,29 @@ gym.register(
 class Push(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("push-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["push-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1427,27 +1495,29 @@ gym.register(
 class PickPlace(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("pick-place-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["pick-place-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1463,27 +1533,29 @@ gym.register(
 class PlateSlide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("plate-slide-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["plate-slide-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1499,27 +1571,29 @@ gym.register(
 class PlateSlideSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("plate-slide-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["plate-slide-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1535,27 +1609,29 @@ gym.register(
 class PlateSlideBack(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("plate-slide-back-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["plate-slide-back-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1571,27 +1647,29 @@ gym.register(
 class PlateSlideBackSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("plate-slide-back-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["plate-slide-back-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1607,27 +1685,29 @@ gym.register(
 class PegUnplugSide(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("peg-unplug-side-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["peg-unplug-side-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1643,27 +1723,29 @@ gym.register(
 class Soccer(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("soccer-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["soccer-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1679,27 +1761,29 @@ gym.register(
 class StickPush(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("stick-push-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["stick-push-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1715,27 +1799,29 @@ gym.register(
 class StickPull(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("stick-pull-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["stick-pull-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1751,27 +1837,29 @@ gym.register(
 class PushWall(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("push-wall-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["push-wall-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1787,27 +1875,29 @@ gym.register(
 class ReachWall(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("reach-wall-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["reach-wall-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1823,27 +1913,29 @@ gym.register(
 class ShelfPlace(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("shelf-place-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["shelf-place-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1859,27 +1951,29 @@ gym.register(
 class SweepInto(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("sweep-into-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["sweep-into-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1895,27 +1989,29 @@ gym.register(
 class Sweep(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("sweep-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["sweep-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1931,27 +2027,29 @@ gym.register(
 class WindowOpen(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("window-open-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["window-open-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
@@ -1967,27 +2065,29 @@ gym.register(
 class WindowClose(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"]}
 
-    def __init__(self) -> None:
+    def __init__(self, render_mode: str = "human") -> None:
         self.ml1 = ML1("window-close-v2")  # Construct the benchmark, sampling tasks
         self.meta_env = self.ml1.train_classes["window-close-v2"]()  # Create an environment with task `assembly`
         self.observation_space = spaces.Box(-1, 1, self.meta_env.observation_space.shape, dtype=np.float32)
         self.action_space = self.meta_env.action_space
         self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.render_mode = render_mode
 
     def reset(self):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
-        return self.meta_env.reset()  # Reset environment
+        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
-        observation, reward, done, info = self.meta_env.step(action)
+        observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
-        return observation, reward, done, info
+        truncated = False
+        return observation.astype(np.float32), reward, truncated, terminated, info
 
-    def render(self, mode="human"):
-        return self.meta_env.render(mode)
+    def render(self):
+        return self.meta_env.render(self.render_mode)
 
     def close(self):
         self.meta_env.close()
