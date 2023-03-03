@@ -212,7 +212,7 @@ class Assembly(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -250,7 +250,7 @@ class Basketball(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -288,7 +288,7 @@ class BinPicking(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -326,7 +326,7 @@ class BoxClose(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -364,7 +364,7 @@ class ButtonPressTopdown(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -402,7 +402,7 @@ class ButtonPressTopdownWall(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -440,7 +440,7 @@ class ButtonPress(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -478,7 +478,7 @@ class ButtonPressWall(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -516,7 +516,7 @@ class CoffeeButton(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -554,7 +554,7 @@ class CoffeePull(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -592,7 +592,7 @@ class CoffeePush(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -630,7 +630,7 @@ class DialTurn(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -668,7 +668,7 @@ class Disassemble(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -706,7 +706,7 @@ class DoorClose(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -744,7 +744,7 @@ class DoorLock(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -782,7 +782,7 @@ class DoorOpen(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -820,7 +820,7 @@ class DoorUnlock(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -858,7 +858,7 @@ class HandInsert(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -896,7 +896,7 @@ class DrawerClose(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -934,7 +934,7 @@ class DrawerOpen(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -972,7 +972,7 @@ class FaucetOpen(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1010,7 +1010,7 @@ class FaucetClose(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1048,7 +1048,7 @@ class Hammer(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1086,7 +1086,7 @@ class HandlePressSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1124,7 +1124,7 @@ class HandlePress(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1162,7 +1162,7 @@ class HandlePullSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1200,7 +1200,7 @@ class HandlePull(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1238,7 +1238,7 @@ class LeverPull(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1276,7 +1276,7 @@ class PegInsertSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1314,7 +1314,7 @@ class PickPlaceWall(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1352,7 +1352,7 @@ class PickOutOfHole(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1390,7 +1390,7 @@ class Reach(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1428,7 +1428,7 @@ class PushBack(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1466,7 +1466,7 @@ class Push(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1504,7 +1504,7 @@ class PickPlace(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1542,7 +1542,7 @@ class PlateSlide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1580,7 +1580,7 @@ class PlateSlideSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1618,7 +1618,7 @@ class PlateSlideBack(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1656,7 +1656,7 @@ class PlateSlideBackSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1694,7 +1694,7 @@ class PegUnplugSide(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1732,7 +1732,7 @@ class Soccer(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1770,7 +1770,7 @@ class StickPush(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1808,7 +1808,7 @@ class StickPull(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1846,7 +1846,7 @@ class PushWall(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1884,7 +1884,7 @@ class ReachWall(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1922,7 +1922,7 @@ class ShelfPlace(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1960,7 +1960,7 @@ class SweepInto(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -1998,7 +1998,7 @@ class Sweep(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -2036,7 +2036,7 @@ class WindowOpen(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
@@ -2074,7 +2074,7 @@ class WindowClose(gym.Env):
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         task = random.choice(self.ml1.train_tasks)
         self.meta_env.set_task(task)  # Set task
         self.meta_env._partially_observable = False
