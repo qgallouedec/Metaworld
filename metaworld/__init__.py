@@ -219,6 +219,7 @@ class Assembly(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -257,6 +258,7 @@ class Basketball(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -295,6 +297,7 @@ class BinPicking(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -333,6 +336,7 @@ class BoxClose(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -371,6 +375,7 @@ class ButtonPressTopdown(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -409,6 +414,7 @@ class ButtonPressTopdownWall(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -447,6 +453,7 @@ class ButtonPress(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -485,6 +492,7 @@ class ButtonPressWall(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -523,6 +531,7 @@ class CoffeeButton(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -561,6 +570,7 @@ class CoffeePull(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -599,6 +609,7 @@ class CoffeePush(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -637,6 +648,7 @@ class DialTurn(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -675,6 +687,7 @@ class Disassemble(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -713,6 +726,7 @@ class DoorClose(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -751,6 +765,7 @@ class DoorLock(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -789,6 +804,7 @@ class DoorOpen(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -827,6 +843,7 @@ class DoorUnlock(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -865,6 +882,7 @@ class HandInsert(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -903,6 +921,7 @@ class DrawerClose(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -941,6 +960,7 @@ class DrawerOpen(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -979,6 +999,7 @@ class FaucetOpen(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1017,6 +1038,7 @@ class FaucetClose(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1055,6 +1077,7 @@ class Hammer(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1093,6 +1116,7 @@ class HandlePressSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1131,6 +1155,7 @@ class HandlePress(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1169,6 +1194,7 @@ class HandlePullSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1207,6 +1233,7 @@ class HandlePull(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1245,6 +1272,7 @@ class LeverPull(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1283,6 +1311,7 @@ class PegInsertSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1321,6 +1350,7 @@ class PickPlaceWall(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1359,6 +1389,7 @@ class PickOutOfHole(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1397,6 +1428,7 @@ class Reach(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1435,6 +1467,7 @@ class PushBack(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1473,6 +1506,7 @@ class Push(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1511,6 +1545,7 @@ class PickPlace(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1549,6 +1584,7 @@ class PlateSlide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1587,6 +1623,7 @@ class PlateSlideSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1625,6 +1662,7 @@ class PlateSlideBack(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1663,6 +1701,7 @@ class PlateSlideBackSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1701,6 +1740,7 @@ class PegUnplugSide(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1739,6 +1779,7 @@ class Soccer(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1777,6 +1818,7 @@ class StickPush(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1815,6 +1857,7 @@ class StickPull(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1853,6 +1896,7 @@ class PushWall(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1891,6 +1935,7 @@ class ReachWall(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1929,6 +1974,7 @@ class ShelfPlace(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -1967,6 +2013,7 @@ class SweepInto(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -2005,6 +2052,7 @@ class Sweep(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -2043,6 +2091,7 @@ class WindowOpen(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
@@ -2081,6 +2130,7 @@ class WindowClose(gym.Env):
         return self.meta_env.reset().astype(np.float32), {}  # Reset environment
 
     def step(self, action):
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
         info["is_success"] = info["success"]
         truncated = False
