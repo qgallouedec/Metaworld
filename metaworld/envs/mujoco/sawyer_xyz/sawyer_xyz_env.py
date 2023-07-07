@@ -80,8 +80,9 @@ class SawyerMocapBase(MujocoEnv, metaclass=abc.ABCMeta):
 
 class SawyerXYZEnv(SawyerMocapBase, metaclass=abc.ABCMeta):
     _HAND_SPACE = Box(
-        np.array([-0.525, .348, -.0525]),
-        np.array([+0.525, 1.025, .7])
+        np.array([-0.525, .348, -.0525], dtype=np.float32),
+        np.array([+0.525, 1.025, .7], dtype=np.float32),
+        dtype=np.float32,
     )
     max_path_length = 500
 
@@ -126,8 +127,8 @@ class SawyerXYZEnv(SawyerMocapBase, metaclass=abc.ABCMeta):
         self.init_right_pad = self.get_body_com('rightpad')
 
         self.action_space = Box(
-            np.array([-1, -1, -1, -1]),
-            np.array([+1, +1, +1, +1]),
+            np.array([-1, -1, -1, -1], dtype=np.float32),
+            np.array([+1, +1, +1, +1], dtype=np.float32),
         )
 
         self.isV2 = "V2" in type(self).__name__
