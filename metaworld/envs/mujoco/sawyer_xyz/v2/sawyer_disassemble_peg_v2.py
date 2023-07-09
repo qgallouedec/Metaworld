@@ -34,12 +34,12 @@ class SawyerNutDisassembleEnvV2(SawyerXYZEnv):
         self.hand_init_pos = self.init_config['hand_init_pos']
 
         self._random_reset_space = Box(
-            np.hstack((obj_low, goal_low)),
-            np.hstack((obj_high, goal_high)),
+            np.hstack((obj_low, goal_low)).astype(np.float32),
+            np.hstack((obj_high, goal_high)).astype(np.float32),
         )
         self.goal_space = Box(
-            np.array(goal_low) + np.array([.0, .0, .005]),
-            np.array(goal_high) + np.array([.0, .0, .005])
+            np.array(goal_low, dtype=np.float32) + np.array([.0, .0, .005], dtype=np.float32),
+            np.array(goal_high, dtype=np.float32) + np.array([.0, .0, .005], dtype=np.float32)
         )
 
     @property

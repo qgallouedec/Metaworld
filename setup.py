@@ -7,6 +7,8 @@ required = [
     'gym>=0.26',
     'mujoco-py<2.2,>=2.0',
     'numpy>=1.18',
+    'gymnasium',
+    'scipy',
 ]
 
 

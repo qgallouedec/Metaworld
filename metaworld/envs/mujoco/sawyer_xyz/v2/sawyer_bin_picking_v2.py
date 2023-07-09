@@ -26,8 +26,8 @@ class SawyerBinPickingEnvV2(SawyerXYZEnv):
         obj_low = (-0.21, 0.65, 0.02)
         obj_high = (-0.03, 0.75, 0.02)
         # Small bounds around the center of the target bin
-        goal_low = np.array([0.1199, 0.699, -0.001])
-        goal_high = np.array([0.1201, 0.701, +0.001])
+        goal_low = np.array([0.1199, 0.699, -0.001], dtype=np.float32)
+        goal_high = np.array([0.1201, 0.701, +0.001], dtype=np.float32)
 
         super().__init__(
             self.model_name,
@@ -37,10 +37,10 @@ class SawyerBinPickingEnvV2(SawyerXYZEnv):
 
         self.init_config = {
             'obj_init_angle': 0.3,
-            'obj_init_pos': np.array([-0.12, 0.7, 0.02]),
-            'hand_init_pos': np.array((0, 0.6, 0.2)),
+            'obj_init_pos': np.array([-0.12, 0.7, 0.02], dtype=np.float32),
+            'hand_init_pos': np.array((0, 0.6, 0.2), dtype=np.float32),
         }
-        self.goal = np.array([0.12, 0.7, 0.02])
+        self.goal = np.array([0.12, 0.7, 0.02], np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -48,19 +48,19 @@ class SawyerBinPickingEnvV2(SawyerXYZEnv):
         self._target_to_obj_init = None
 
         self.hand_and_obj_space = Box(
-            np.hstack((self.hand_low, obj_low)),
-            np.hstack((self.hand_high, obj_high)),
+            np.hstack((self.hand_low, obj_low)).astype(np.float32),
+            np.hstack((self.hand_high, obj_high)).astype(np.float32),
         )
 
         self.goal_and_obj_space = Box(
-            np.hstack((goal_low[:2], obj_low[:2])),
-            np.hstack((goal_high[:2], obj_high[:2])),
+            np.hstack((goal_low[:2], obj_low[:2])).astype(np.float32),
+            np.hstack((goal_high[:2], obj_high[:2])).astype(np.float32),
         )
 
         self.goal_space = Box(goal_low, goal_high)
         self._random_reset_space = Box(
-            np.hstack((obj_low, goal_low)),
-            np.hstack((obj_high, goal_high)),
+            np.hstack((obj_low, goal_low)).astype(np.float32),
+            np.hstack((obj_high, goal_high)).astype(np.float32),
         )
 
     @property

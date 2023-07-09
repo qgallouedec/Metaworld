@@ -24,7 +24,7 @@ class SawyerDoorCloseEnvV2(SawyerDoorEnvV2):
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
 
-        self.goal_space = Box(np.array(goal_low), np.array(goal_high))
+        self.goal_space = Box(np.array(goal_low, dtype=np.float32), np.array(goal_high, dtype=np.float32))
 
     def reset_model(self):
         self._reset_hand()
