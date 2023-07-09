@@ -222,7 +222,6 @@ class MetaWorldEnv(gymnasium.Env):
     def step(self, action):
         action = np.clip(action, self.action_space.low, self.action_space.high)
         observation, reward, terminated, info = self.meta_env.step(action)
-        terminated = terminated or bool(info["success"])
         truncated = False
         return observation.astype(np.float32), reward, truncated, terminated, info
 
