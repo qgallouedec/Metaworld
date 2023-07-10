@@ -205,19 +205,18 @@ class MetaWorldEnv(gymnasium.Env):
 
     def __init__(self, task_name: str, render_mode: str = "human") -> None:
         ml1 = ML1(task_name)  # Construct the benchmark, sampling tasks
-        self.train_tasks = ml1.train_tasks
         self.meta_env = ml1.train_classes[task_name]()  # Create an environment with task `assembly`
+        self.task_name = task_name
         self.observation_space = spaces.Box(-1.0, 1.0, (39,), dtype=np.float32)
         self.action_space = spaces.Box(-1.0, 1.0, (4,), dtype=np.float32)
-        self.meta_env._partially_observable = False
         self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
     def reset(self, seed=None, options=None):
-        task = random.choice(self.train_tasks)
-        self.meta_env.set_task(task)  # Set task
-        self.meta_env._partially_observable = False
-        return self.meta_env.reset().astype(np.float32), {}  # Reset environment
+        rand_vec = np.random.uniform(self.meta_env._random_reset_space.low, self.meta_env._random_reset_space.high)
+        task = _encode_task(self.task_name, {"rand_vec": rand_vec, "env_cls": self.meta_env.__class__, "partially_observable": False})
+        self.meta_env.set_task(task)
+        return self.meta_env.reset().astype(np.float32), {}
 
     def step(self, action):
         action = np.clip(action, self.action_space.low, self.action_space.high)
