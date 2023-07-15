@@ -74,7 +74,7 @@ class Benchmark(abc.ABC):
 _ML_OVERRIDE = dict(partially_observable=True)
 _MT_OVERRIDE = dict(partially_observable=False)
 
-_N_GOALS = 50
+_N_GOALS = 0
 
 
 def _encode_task(env_name, data):
@@ -213,9 +213,9 @@ class MetaWorldEnv(gymnasium.Env):
         self.render_mode = render_mode
 
     def reset(self, seed=None, options=None):
-        rand_vec = np.random.uniform(self.meta_env._random_reset_space.low, self.meta_env._random_reset_space.high)
-        task = _encode_task(self.task_name, {"rand_vec": rand_vec, "env_cls": self.meta_env.__class__, "partially_observable": False})
-        self.meta_env.set_task(task)
+        self.meta_env._freeze_rand_vec = False
+        self.meta_env._set_task_inner()
+        self.meta_env._set_task_called = True
         return self.meta_env.reset().astype(np.float32), {}
 
     def step(self, action):
