@@ -42,11 +42,11 @@ class SawyerPegInsertionSideEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.6, 0.02]),
-            'hand_init_pos': np.array([0, .6, .2]),
+            'obj_init_pos': np.array([0, 0.6, 0.02], dtype=np.float32),
+            'hand_init_pos': np.array([0, .6, .2], dtype=np.float32),
         }
 
-        self.goal = np.array([-0.3, 0.6, 0.0])
+        self.goal = np.array([-0.3, 0.6, 0.0], dtype=np.float32)
 
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']

@@ -23,8 +23,8 @@ class SawyerStickPushEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'stick_init_pos': np.array([-0.1, 0.6, 0.02]),
-            'hand_init_pos': np.array([0, 0.6, 0.2]),
+            'stick_init_pos': np.array([-0.1, 0.6, 0.02], dtype=np.float32),
+            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
         }
         self.goal = self.init_config['stick_init_pos']
         self.stick_init_pos = self.init_config['stick_init_pos']

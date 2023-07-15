@@ -28,7 +28,7 @@ class SawyerBoxCloseEnvV2(SawyerXYZEnv):
             'obj_init_pos': np.array([0, 0.55, 0.02], dtype=np.float32),
             'hand_init_pos': np.array((0, 0.6, 0.2), dtype=np.float32),
         }
-        self.goal = np.array([0.0, 0.75, 0.133])
+        self.goal = np.array([0.0, 0.75, 0.133], dtype=np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']

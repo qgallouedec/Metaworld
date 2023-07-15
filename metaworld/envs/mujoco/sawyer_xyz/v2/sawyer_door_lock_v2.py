@@ -22,10 +22,10 @@ class SawyerDoorLockEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.85, 0.15]),
+            'obj_init_pos': np.array([0, 0.85, 0.15], dtype=np.float32),
             'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
         }
-        self.goal = np.array([0, 0.85, 0.1])
+        self.goal = np.array([0, 0.85, 0.1], dtype=np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']
 

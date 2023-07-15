@@ -25,7 +25,7 @@ class SawyerHandInsertEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.6, 0.05]),
+            'obj_init_pos': np.array([0, 0.6, 0.05], dtype=np.float32),
             'obj_init_angle': 0.3,
             'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
         }

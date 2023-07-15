@@ -26,7 +26,7 @@ class SawyerButtonPressWallEnvV2(SawyerXYZEnv):
             'obj_init_pos': np.array([0., 0.9, 0.115], dtype=np.float32),
             'hand_init_pos': np.array([0, 0.4, 0.2], dtype=np.float32),
         }
-        self.goal = np.array([0, 0.84, 0.12])
+        self.goal = np.array([0, 0.84, 0.12], dtype=np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']
 

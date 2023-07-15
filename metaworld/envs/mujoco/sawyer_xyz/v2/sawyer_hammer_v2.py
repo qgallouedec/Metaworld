@@ -24,8 +24,8 @@ class SawyerHammerEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'hammer_init_pos': np.array([0, 0.5, 0.0]),
-            'hand_init_pos': np.array([0, 0.4, 0.2]),
+            'hammer_init_pos': np.array([0, 0.5, 0.0], dtype=np.float32),
+            'hand_init_pos': np.array([0, 0.4, 0.2], dtype=np.float32),
         }
         self.goal = self.init_config['hammer_init_pos']
         self.hammer_init_pos = self.init_config['hammer_init_pos']

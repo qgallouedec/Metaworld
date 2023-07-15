@@ -25,11 +25,11 @@ class SawyerCoffeePullEnvV2(SawyerXYZEnv):
         )
 
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.75, 0.]),
+            'obj_init_pos': np.array([0, 0.75, 0.], dtype=np.float32),
             'obj_init_angle': 0.3,
-            'hand_init_pos': np.array([0., .4, .2]),
+            'hand_init_pos': np.array([0., .4, .2], dtype=np.float32),
         }
-        self.goal = np.array([0., 0.6, 0])
+        self.goal = np.array([0., 0.6, 0], dtype=np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
