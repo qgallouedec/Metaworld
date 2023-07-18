@@ -209,7 +209,7 @@ class MetaWorldEnv(gymnasium.Env):
         self.task_name = task_name
         self.observation_space = spaces.Box(-1.0, 1.0, (39,), dtype=np.float32)
         self.action_space = spaces.Box(-1.0, 1.0, (4,), dtype=np.float32)
-        self.metadata["video.frames_per_second"] = self.meta_env.metadata["video.frames_per_second"]
+        self.metadata['render_fps'] = self.meta_env.metadata["video.frames_per_second"]
         self.render_mode = render_mode
 
     def reset(self, seed=None, options=None):
